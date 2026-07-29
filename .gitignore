@@ -28,7 +28,11 @@ yarn-error.log*
 .vscode 
 
 # local env files
+.env
 .env*.local
+
+# bunny cli — per-developer link to a database, not shared state
+.bunny
 
 # vercel
 .vercel

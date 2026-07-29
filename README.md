@@ -40,9 +40,43 @@ curl -X DELETE https://your-script.b-cdn.net/notes/1
 
 The script reads `BUNNY_DATABASE_URL` and `BUNNY_DATABASE_AUTH_TOKEN`.
 
-To set them, go to **Dashboard > Edge Platform > Database > [Select Database] >
-Access**, click **Generate Tokens**, then **Add Secrets to Edge Script** and pick
-this script. Bunny adds both variables to the script for you. See
+### Creating a database
+
+You have three options, so pick whichever fits how you work:
+
+- **From the dashboard** — click **Add** in the sidebar and choose **Database**,
+  then set a name and the regions to deploy to. See the
+  [Database quickstart](https://docs.bunny.net/database/quickstart).
+- **While creating an Edge Script** — you can provision a database as part of the
+  script creation flow, which saves wiring the credentials up separately.
+- **With the [Bunny CLI](https://docs.bunny.net/database/quickstart)** — handy if
+  you'd rather not leave the terminal, and the only option that scripts cleanly.
+
+For the CLI:
+
+```bash
+bunny login
+
+# Prompts for a name and regions, then offers to link this directory,
+# generate an auth token, and write both variables to .env
+bunny db create
+
+# Non-interactive, for CI — prompts are suppressed under --output json,
+# so the flags are what opt you in
+bunny db create --name es-database-script --primary FR \
+  --token --save-env --output json
+```
+
+`bunny db list` shows what you already have, `bunny db shell` opens a SQL REPL
+against it, and `bunny db studio` gives you a read-only table viewer in the
+browser.
+
+### Connecting it to this script
+
+For a database that already exists, go to **Dashboard > Edge Platform >
+Database > [Select Database] > Access**, click **Generate Tokens**, then **Add
+Secrets to Edge Script** and pick this script. Bunny adds both variables to the
+script for you. See
 [Connect Edge Scripting to Bunny Database](https://docs.bunny.net/database/connect/scripting).
 
 The `notes` table is created on startup with `CREATE TABLE IF NOT EXISTS`. Use
@@ -69,6 +103,14 @@ first:
 
 ```
 BUNNY_DATABASE_URL=... BUNNY_DATABASE_AUTH_TOKEN=... deno task dev
+```
+
+If you let `bunny db create --save-env` write a `.env` for you, note that
+`deno task dev` does not pick it up on its own — Deno only reads `.env` when you
+ask it to:
+
+```
+deno run --env-file src/main.ts
 ```
 
 We also use `pnpm` to use `changeset`.
