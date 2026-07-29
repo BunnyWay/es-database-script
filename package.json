@@ -1,0 +1,35 @@
+{
+  "name": "es-database-script",
+  "version": "0.0.0",
+  "main": "src/main.ts",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BunnyWay/es-database-script.git"
+  },
+  "keywords": [
+    "github",
+    "bunny",
+    "database",
+    "libsql",
+    "sqlite"
+  ],
+  "author": "Bunny Devs",
+  "license": "MIT",
+  "scripts": {
+    "lint": "deno lint",
+    "test": "deno test --permit-no-files -A src/**/*.test.ts",
+    "check": "deno check src/main.ts",
+    "build": "mkdir -p dist && deno run -A build.mjs",
+    "dev": "deno run src/main.ts",
+    "release": "echo \"No release\"",
+    "ci:version": "pnpm changeset version",
+    "ci:publish": "./scripts/publish.sh"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.2",
+    "@types/node": "^22.15.3",
+    "esbuild": "^0.25.3"
+  }
+}
