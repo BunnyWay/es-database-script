@@ -27,6 +27,10 @@
     "ci:version": "pnpm changeset version",
     "ci:publish": "./scripts/publish.sh"
   },
+  "dependencies": {
+    "@bunny.net/edgescript-sdk": "0.12.0",
+    "@libsql/client": "0.6.0"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
     "@types/node": "^22.15.3",

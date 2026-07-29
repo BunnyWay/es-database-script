@@ -1,5 +1,5 @@
-import * as BunnySDK from "https://esm.sh/@bunny.net/edgescript-sdk@0.12.0";
-import { createClient } from "https://esm.sh/@libsql/client@0.6.0/web";
+import * as BunnySDK from "npm:@bunny.net/edgescript-sdk@0.12.0";
+import { createClient } from "npm:@libsql/client@0.6.0/web";
 import process from "node:process";
 
 const url = process.env.BUNNY_DATABASE_URL;
