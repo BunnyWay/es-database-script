@@ -1,4 +1,4 @@
-import * as BunnySDK from "npm:@bunny.net/edgescript-sdk@0.12.0";
+import * as BunnySDK from "npm:@bunny.net/edgescript-sdk@0.12.1";
 import { createClient } from "npm:@libsql/client@0.17.4/web";
 import process from "node:process";
 
